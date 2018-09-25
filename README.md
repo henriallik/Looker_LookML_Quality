@@ -5,7 +5,29 @@ Concept of LookML Quality was defined and developed by Jeff McClelland. Currentl
 
 Finding the right dimension or measure is the hardest part of using Looker. This is made 10x worse when there's incorrect data, errors, duplicates, or incomprehensible names.
 
-![Score](https://github.com/henriallik/Looker_LookML_Quality/blob/master/score.PNG)
+![Explore](https://github.com/henriallik/Looker_LookML_Quality/blob/master/img/explore.PNG)  
+
+
+__Ideally__ in Looker there should be:
+* __Only necessary__ data
+* Everything is __clearly labelled__
+* __Unambiguous__ (no dupes)
+
+But code quality is hard to measure
+(and measure over time)
+
+Thus we have created a __proxy for quality__ called the __LookML Quality Score__
+
+![Score](https://github.com/henriallik/Looker_LookML_Quality/blob/master/img/score.PNG)
+
+
+![Views](https://github.com/henriallik/Looker_LookML_Quality/blob/master/img/views.PNG)
+
+
+![Commits](https://github.com/henriallik/Looker_LookML_Quality/blob/master/img/commits.PNG)
+
+
+
 
 ## How to use it?
 
