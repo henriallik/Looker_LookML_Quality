@@ -33,11 +33,12 @@ Thus we have created a __proxy for quality__ called the __LookML Quality Score__
 
 1. Create `lookup_lookML_points` table => `lookup_lookML_points.sql`
 2. Add your database connection details to `config.py` file
-3. Run `master.py` => This will execute following scripts  
-  3.1 `scan_views.py`  
-  3.2 `view_scores.sql`  
-  3.3 `scan_commits.py`  
-  3.4 `commit_scores.sql`  
+3. Run [`master.py`](https://github.com/henriallik/Looker_LookML_Quality/blob/master/master.py) => This will execute following scripts  
+  3.1 [`scan_views.py`](https://github.com/henriallik/Looker_LookML_Quality/blob/master/scan_views.py)  
+  3.2 [`view_scores.sql`](https://github.com/henriallik/Looker_LookML_Quality/blob/master/view_scores.sql)  
+  3.3 [`scan_commits.py`](https://github.com/henriallik/Looker_LookML_Quality/blob/master/scan_commits.py)  
+  3.4 [`commit_scores.sql`](https://github.com/henriallik/Looker_LookML_Quality/blob/master/commit_scores.sql)  
 4. View data in Looker
 
 
+## LookML - TBA
