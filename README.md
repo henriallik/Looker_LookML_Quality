@@ -5,7 +5,7 @@ Concept of LookML Quality was defined and developed by Jeff McClelland. Currentl
 
 Finding the right dimension or measure is the hardest part of using Looker. This is made 10x worse when there's incorrect data, errors, duplicates, or incomprehensible names.
 
-![](https://preview.ibb.co/bx2j99/score.png)
+![Score](https://github.com/henriallik/Looker_LookML_Quality/blob/master/score.PNG)
 
 ## How to use it?
 
