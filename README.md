@@ -5,6 +5,17 @@ Concept of LookML Quality was defined and developed by Jeff McClelland. Currentl
 
 Finding the right dimension or measure is the hardest part of using Looker. This is made 10x worse when there's incorrect data, errors, duplicates, or incomprehensible names.
 
+![](https://preview.ibb.co/bx2j99/score.png)
 
 ## How to use it?
+
+1. Create `lookup_lookML_points` table => `lookup_lookML_points.sql`
+2. Add your database connection details to `config.py` file
+3. Run `master.py` => This will execute following scripts  
+  3.1 `scan_views.py`  
+  3.2 `view_scores.sql`  
+  3.3 `scan_commits.py`  
+  3.4 `commit_scores.sql`  
+4. View data in Looker
+
 
