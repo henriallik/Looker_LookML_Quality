@@ -1,16 +1,16 @@
 import importlib
-import psycopg2
-# This is to get your DB credentials from config.py file, make sure that your details are correct
-from config import postgres_connectors as pc
-import sqlite3
-from sqlite3 import OperationalError
+from snowflake.sqlalchemy import URL
+from sqlalchemy import create_engine
 
 # How to update LookML dashboards
-# 1. Run scan_views.py !
+# 1. Run LookML_quality_views_combined.py
 # 2. Now run lookMl_view_scores_combined.sql - every script in that order
-# 4. Run scan_commits.py
+# 4. Run LookML_quality_commits_combined.py
 # 5. Then rebuild reports.lookup_lookml_quality_commits_combined in lookML_commit_scores_combined.sql
 # 6. Check dashboards
+
+#Enter your username for database connection
+user = ''
 
 def executeScriptsFromFile(filename):
     # Open and read the file as a single buffer
@@ -21,42 +21,63 @@ def executeScriptsFromFile(filename):
     # all SQL commands (split on ';')
     #sqlCommands = sqlFile.split(';')
 
+    print("Connecting to DB - Snowflake")
     try:
-        conn = psycopg2.connect(database=pc['db'], user=pc['user'], password=pc['passwd'], host=pc['host'], port=pc['port'])
-    except Exception, e:
-        print 'Could not connect to db, error message: %s' % e
-    cur = conn.cursor()
+        engine = create_engine(URL(
+            account='',
+            region='',
+            user=user,
+            database='',
+            schema='',
+            warehouse='',
+            authenticator='externalbrowser',
+            role='' 
+        ))
+    except Exception as e:
+        print(e)
+        engine = create_engine(URL(
+            account='',
+            region='',
+            user=user,
+            database='',
+            schema='',
+            warehouse='',
+            authenticator='externalbrowser',
+            role=''  
+        ))
+    try:
+        connection = engine.connect()
+        print("Executing SQL")
+        results = connection.execute(sqlFile).fetchall()
+        print("Got data")
+        print(results)
+        return results
 
-    #for command in sqlCommands:
-    try:
-        #print command
-        cur.execute(sqlFile)
-    except OperationalError, msg:
-        print "Command skipped: ", msg
-    #results = cur.fetchall()
-    #print results
-    conn.commit()
-    cur.close()
-    conn.close()
+    except Exception, e:
+        print("Can't query: {0}").format(e)
+
+    finally:
+        connection.close()
+        engine.dispose()
 
 
 
 errors = []
 #1
 print("Running LookML Quality Views Combined Python")
-#importlib.import_module('scan_views')
+importlib.import_module('LookML_quality_views_combined')
 print("Finished first script")
 #2
 print("Executing LookML View Scores Combined SQL")
-executeScriptsFromFile('view_scores.sql')
+executeScriptsFromFile('lookML_view_scores_combined.sql')
 print("Finished second script")
 #3
 print("Running LookML Quality Commits Combined Python")
-importlib.import_module('scan_commits')
+importlib.import_module('LookML_quality_commits_combined')
 print("Finished third script")
 #4
 print("Executing LookML Commit Scores Combined")
-executeScriptsFromFile('commit_scores.sql')
+executeScriptsFromFile('lookML_commit_scores_combined.sql')
 print("Finished final script")
 
 
